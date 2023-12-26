@@ -20,9 +20,13 @@ const Customer = db.define('customer', {
       isEmail: true,
     },
   },
-  address: {
+  password: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: true,
   },
 });
 
