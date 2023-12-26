@@ -3,7 +3,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
-
+const { verifyToken } = require('../Middleware/authMiddleware');
 // Validation middleware for creating an order
 validateOrderCreation = [
   body('customerId').notEmpty().withMessage('Customer ID is required'),
@@ -19,10 +19,10 @@ checkValidationResult = (req, res, next) => {
   next();
 };
 
-router.post('/', validateOrderCreation, checkValidationResult, orderController.placeOrder);
-router.get('/:id', orderController.getOrder);
-router.get('/:id', orderController.getOrder);
-router.put('/:id', validateOrderCreation, checkValidationResult, orderController.updateOrder);
-router.delete('/:id', orderController.cancelOrder);
+router.post('/', verifyToken, validateOrderCreation, checkValidationResult, orderController.placeOrder);
+router.get('/:id', verifyToken, orderController.getOrder);
+router.get('/:id', verifyToken, orderController.getOrder);
+router.put('/:id', verifyToken, validateOrderCreation, checkValidationResult, verifyToken, orderController.updateOrder);
+router.delete('/:id', verifyToken, orderController.cancelOrder);
 
 module.exports = router;

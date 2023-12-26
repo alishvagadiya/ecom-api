@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+const { verifyToken } = require('../Middleware/authMiddleware');
 const customerController = require('../controllers/customerController');
 // const checkCache = require('../utils/cache');
 
@@ -20,10 +21,10 @@ checkValidationResult = (req, res, next) => {
   }
   next();
 };
-router.post('/', validateData, checkValidationResult, customerController.addCustomer);
-router.get('/', customerController.getAllCustomer);
-router.get('/:id', customerController.getCustomer);
-router.put('/:id', validateData, checkValidationResult, customerController.updateCustomer);
-router.delete('/:id', customerController.deleteCustomer);
+router.post('/', verifyToken, validateData, checkValidationResult, customerController.addCustomer);
+router.get('/', verifyToken, customerController.getAllCustomer);
+router.get('/:id', verifyToken, customerController.getCustomer);
+router.put('/:id', verifyToken, validateData, checkValidationResult, customerController.updateCustomer);
+router.delete('/:id', verifyToken, customerController.deleteCustomer);
 
 module.exports = router;

@@ -3,6 +3,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const { verifyToken } = require('../Middleware/authMiddleware');
 
 // Validation middleware for creating a product
 validateProductCreation = [
@@ -20,10 +21,10 @@ checkValidationResult = (req, res, next) => {
   next();
 };
 
-router.post('/', validateProductCreation, checkValidationResult, productController.addProduct);
-router.get('/', productController.getAllProduct);
-router.get('/:id', productController.getProduct);
-router.put('/:id', validateProductCreation, checkValidationResult, productController.updateProduct);
-router.delete('/:id', productController.deleteProduct);
+router.post('/', verifyToken, validateProductCreation, checkValidationResult, productController.addProduct);
+router.get('/', verifyToken, productController.getAllProduct);
+router.get('/:id', verifyToken, productController.getProduct);
+router.put('/:id', verifyToken, validateProductCreation, checkValidationResult, productController.updateProduct);
+router.delete('/:id', verifyToken, productController.deleteProduct);
 
 module.exports = router;
