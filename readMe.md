@@ -12,8 +12,6 @@ A Node.js Express API for managing customer data, orders, and products in a hypo
 - [Validation](#validation)
 - [Caching](#caching)
 - [Rate Limiting](#rate-limiting)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -33,7 +31,7 @@ This is a RESTful API built using Node.js and Express, providing functionality f
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/alishvagadiya/e-commerce-api.git
+   git clone https://github.com/alishvagadiya/ecom-api.git
 
     Navigate to the project directory:
 
@@ -48,7 +46,7 @@ bash
 
     npm install
 
-Usage
+## Usage
 
 Run the application locally:
 
@@ -56,32 +54,39 @@ bash
 
 npm start
 
-Endpoints
-Customers
+## Endpoints
 
-    POST /api/customers: Create a new customer.
-    GET /api/customers: Get a list of customers.
-    GET /api/customers/:id: Get a specific customer by ID.
-    PUT /api/customers/:id: Update a customer by ID.
-    DELETE /api/customers/:id: Delete a customer by ID.
+### Customers
 
-Orders
+| Methods | endpoint           | description                    |
+| ------- | ------------------ | ------------------------------ |
+| POST    | /api/customers     | Create a new customer.         |
+| GET     | /api/customers     | Get a list of customers.       |
+| GET     | /api/customers/:id | Get a specific customer by ID. |
+| PUT     | /api/customers/:id | Update a customer by ID.       |
+| DELETE  | /api/customers/:id | Delete a customer by ID.       |
 
-    POST /api/orders: Place a new order.
-    GET /api/orders: Get a list of orders.
-    GET /api/orders/:id: Get a specific order by ID.
-    PUT /api/orders/:id: Update an order by ID.
-    DELETE /api/orders/:id: Cancel an order by ID.
+### Orders
 
-Products
+| Methods | endpoint        | description                 |
+| ------- | --------------- | --------------------------- |
+| POST    | /api/orders     | Place a new order.          |
+| GET     | /api/orders     | Get a list of orders.       |
+| GET     | /api/orders/:id | Get a specific order by ID. |
+| PUT     | /api/orders/:id | Update an order by ID.      |
+| DELETE  | /api/orders/:id | Cancel an order by ID.      |
 
-    POST /api/products: Add a new product.
-    GET /api/products: Get a list of products.
-    GET /api/products/:id: Get a specific product by ID.
-    PUT /api/products/:id: Update a product by ID.
-    DELETE /api/products/:id: Delete a product by ID.
+### Products
 
-Validation
+| Methods | endpoint          | description                   |
+| ------- | ----------------- | ----------------------------- |
+| POST    | /api/products     | Add a new product.            |
+| GET     | /api/products     | Get a list of products.       |
+| GET     | /api/products/:id | Get a specific product by ID. |
+| PUT     | /api/products/:id | Update a product by ID.       |
+| DELETE  | /api/products/:id | Delete a product by ID.       |
+
+## Validation
 
 Data validation is implemented for input fields in the following routes:
 
@@ -89,14 +94,17 @@ Data validation is implemented for input fields in the following routes:
     For order routes: POST /api/orders, PUT /api/orders/:id
     For product routes: POST /api/products, PUT /api/products/:id
 
-Caching
+## Caching
 
 Caching mechanisms are applied to optimize performance in the following routes:
 
     GET /api/customers
+    GET /api/customers/:id
     GET /api/orders
+    GET /api/orders/:id
     GET /api/products
+    GET /api/products/:id
 
-Rate Limiting
+## Rate Limiting
 
 API rate limiting is applied for better resource management in all routes.
