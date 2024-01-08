@@ -20,8 +20,8 @@ checkValidationResult = (req, res, next) => {
 };
 
 router.post('/', verifyToken, validateOrderCreation, checkValidationResult, orderController.placeOrder);
-router.get('/:id', verifyToken, orderController.getOrder);
-router.get('/:id', verifyToken, orderController.getOrder);
+router.get('/:id', verifyToken, checkCache, orderController.getOrder);
+router.get('/:id', verifyToken, checkCache, orderController.getOrder);
 router.put('/:id', verifyToken, validateOrderCreation, checkValidationResult, verifyToken, orderController.updateOrder);
 router.delete('/:id', verifyToken, orderController.cancelOrder);
 

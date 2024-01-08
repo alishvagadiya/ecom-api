@@ -22,8 +22,8 @@ checkValidationResult = (req, res, next) => {
 };
 
 router.post('/', verifyToken, validateProductCreation, checkValidationResult, productController.addProduct);
-router.get('/', verifyToken, productController.getAllProduct);
-router.get('/:id', verifyToken, productController.getProduct);
+router.get('/', verifyToken, checkCache, productController.getAllProduct);
+router.get('/:id', verifyToken, checkCache, productController.getProduct);
 router.put('/:id', verifyToken, validateProductCreation, checkValidationResult, productController.updateProduct);
 router.delete('/:id', verifyToken, productController.deleteProduct);
 
