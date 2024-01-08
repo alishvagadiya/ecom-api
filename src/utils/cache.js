@@ -11,6 +11,12 @@ exports.checkCache = (req, res, next) => {
   if (cachedData) {
     return res.json(cachedData);
   }
-
   next();
+};
+
+// Middleware to set cache before processing a request
+exports.setCache = (req, data) => {
+  const key = req.originalUrl || req.url;
+  cache.set(key, data);
+  return;
 };

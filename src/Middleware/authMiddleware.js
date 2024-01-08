@@ -33,13 +33,13 @@ exports.checkValidationResult = (req, res, next) => {
 
 exports.verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
-  console.log({ token })
+  // console.log({ token })
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
   jwt.verify(token.replace('Bearer ', ''), 'your-secret-key', (err, decoded) => {
-    console.log({ token, err, decoded })
+    // console.log({ token, err, decoded })
     if (err) {
       return res.status(401).json({ error: 'Invalid token', err, decoded });
     }

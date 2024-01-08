@@ -4,7 +4,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const { verifyToken } = require('../Middleware/authMiddleware');
 const customerController = require('../controllers/customerController');
-const checkCache = require('../utils/cache');
+const { checkCache, setCache } = require('../utils/cache');
 
 // Middleware to validate incoming data
 const validateData = [
@@ -22,6 +22,7 @@ checkValidationResult = (req, res, next) => {
   next();
 };
 router.post('/', verifyToken, validateData, checkValidationResult, customerController.addCustomer);
+// router.get('/', verifyToken, checkCache, customerController.getAllCustomer);
 router.get('/', verifyToken, checkCache, customerController.getAllCustomer);
 router.get('/:id', verifyToken, checkCache, customerController.getCustomer);
 router.put('/:id', verifyToken, validateData, checkValidationResult, customerController.updateCustomer);

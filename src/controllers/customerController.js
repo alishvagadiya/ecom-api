@@ -1,5 +1,6 @@
 // /src/controllers/customerController.js
 const Customer = require('../models/customerModel');
+const { setCache } = require('../utils/cache');
 
 exports.addCustomer = async (req, res) => {
   try {
@@ -24,14 +25,16 @@ exports.getCustomer = async (req, res) => {
   }
 };
 
-exports.getAllCustomer = async (req, res) => {
+exports.getAllCustomer = async (req, res, next) => {
   try {
     const customers = await Customer.findAll();
     if (customers) {
+      setCache(req, customers)
       res.json(customers);
     } else {
       res.status(404).json({ error: 'Customer not found' });
     }
+    next();
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }

@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const { verifyToken } = require('../Middleware/authMiddleware');
+const { checkCache, setCache } = require('../utils/cache');
 
 // Validation middleware for creating a product
 validateProductCreation = [
