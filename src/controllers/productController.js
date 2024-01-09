@@ -1,5 +1,6 @@
 // /src/controllers/productController.js
 const Product = require('../models/productModel');
+const { setCache } = require('../utils/cache');
 
 exports.addProduct = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ exports.getProduct = async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);
     if (product) {
+      setCache(req, product)
       res.json(product);
     } else {
       res.status(404).json({ error: 'Product not found' });
@@ -26,6 +28,7 @@ exports.getAllProduct = async (req, res) => {
   try {
     const products = await Product.findAll();
     if (products) {
+      setCache(req, customers)
       res.json(products);
     } else {
       res.status(404).json({ error: 'Product not found' });

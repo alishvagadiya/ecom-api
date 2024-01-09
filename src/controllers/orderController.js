@@ -2,6 +2,7 @@
 const Order = require('../models/orderModel');
 const Product = require('../models/productModel');
 const Customer = require('../models/customerModel');
+const { setCache } = require('../utils/cache');
 
 exports.placeOrder = async (req, res) => {
   try {
@@ -141,6 +142,7 @@ exports.getOrder = async (req, res) => {
     });
 
     if (order) {
+      setCache(req, order)
       res.json(order);
     } else {
       res.status(404).json({ error: 'Order not found' });

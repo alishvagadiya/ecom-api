@@ -22,7 +22,6 @@ checkValidationResult = (req, res, next) => {
   next();
 };
 router.post('/', verifyToken, validateData, checkValidationResult, customerController.addCustomer);
-// router.get('/', verifyToken, checkCache, customerController.getAllCustomer);
 router.get('/', verifyToken, checkCache, customerController.getAllCustomer);
 router.get('/:id', verifyToken, checkCache, customerController.getCustomer);
 router.put('/:id', verifyToken, validateData, checkValidationResult, customerController.updateCustomer);
